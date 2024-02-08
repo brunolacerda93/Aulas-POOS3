@@ -3,8 +3,12 @@ package Aula_01;
 import java.util.ArrayList;
 
 public class ExerciciosAulaInicial {
-    private static double calculaJurosCompostosPorAno(double capital, double taxa, double anos) {
+    private static Double calculaJurosCompostosPorAno(double capital, double taxa, double anos) {
         return capital * Math.pow((1 + taxa), anos);
+    }
+
+    private static Double calculaIMC(Double quilos, Double altura) {
+        return quilos/(altura*altura);
     }
 
     private static String triangulamento(int lado1, int lado2, int lado3) {
@@ -55,6 +59,8 @@ public class ExerciciosAulaInicial {
         System.out.println(calculaJurosCompostosPorAno(2356.47, 0.13, 12.0));
 
         // Exercício 02
+        System.out.println(calculaIMC(130.0, 1.9));
+        System.out.println(calculaIMC(73.0, 1.8));
 
         // Exercício 03
 
