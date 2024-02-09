@@ -1,6 +1,8 @@
 package Aula_01;
 
 import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
 
 public class ExerciciosAulaInicial {
     private static Double calculaJurosCompostosPorAno(double capital, double taxa, double anos) {
@@ -35,14 +37,8 @@ public class ExerciciosAulaInicial {
                 && b + c > a;
     }
 
-    private static void calculaMediaNotas(ArrayList<Double> notas) {
-        Double soma = 0.0;
-
-        for (Double n : notas) {
-            soma += n;
-        }
-
-        double media = soma/(notas.size());
+    private static void calculaMediaNotas(List<Double> notas) {
+        double media = calculateAverage(notas);
         System.out.println("Média: " + media);
 
         System.out.println("Acima da média:");
@@ -51,6 +47,32 @@ public class ExerciciosAulaInicial {
                 System.out.println(n);
             }
         }
+    }
+
+    private static double calculateAverage(List<? extends Number> array) {
+        double sum = 0.0;
+        for (Number n : array) {
+            sum += n.doubleValue();
+        }
+        return sum/array.size();
+    }
+
+    private static List<Integer> capturaIdades() {
+        List<Integer> ls = new ArrayList<>();
+        Scanner sc = new Scanner(System.in);
+        int idade;
+
+        System.out.println("Informe idades");
+        do { // hast
+            System.out.print(">> ");
+            idade = sc.nextInt();
+            if (idade >= 0) {
+                ls.add(idade);
+            }
+        } while (idade >= 0);
+
+        sc.close();
+        return ls;
     }
 
     public static void AulaInicial() {
@@ -80,6 +102,16 @@ public class ExerciciosAulaInicial {
         calculaMediaNotas(Notas);
 
         // Exercício 06
+        List<Integer> idades = capturaIdades();
+        System.out.println("Média das idades: " + calculateAverage(idades));
+
+        int n;
+
+        n = 0; for (Integer i : idades) if (i > 20) n++;
+        System.out.println(n + " pessoas na lista são maiores de idade");
+
+        n = 0; for (Integer i : idades) if (i > 65) n++;
+        System.out.println(n + " pessoas na lista estão acima dos 65 anos");
 
         // Exercício 07
     }
