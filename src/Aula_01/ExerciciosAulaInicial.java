@@ -47,10 +47,12 @@ public class ExerciciosAulaInicial {
                 && b + c > a;
     }
 
-    private static void exibeNotasAcimaDaMedia(List<Double> lsNotas, Double media) {
-        if (lsNotas == null || media == null) {
+    private static void exibeNotasAcimaDaMedia(List<Double> lsNotas) {
+        if (lsNotas == null || lsNotas.isEmpty()) {
             return;
         }
+        Double media = utils.averageOf(lsNotas);
+
         System.out.println("Acima da média:");
         for (Double n : lsNotas) {
             if (n > media) {
@@ -66,10 +68,17 @@ public class ExerciciosAulaInicial {
 
         System.out.println("Informe idades");
         do { // hast
-            System.out.print(">> ");
-            idade = sc.nextInt();
-            if (idade >= 0) {
-                ls.add(idade);
+            try {
+                System.out.print(">> ");
+                idade = sc.nextInt();
+                if (idade >= 0) {
+                    ls.add(idade);
+                }
+            } catch (Exception e) {
+                System.out.println("Digite apenas números!");
+                idade = 0;
+            } finally {
+                sc.nextLine();
             }
         } while (idade >= 0);
 
@@ -175,9 +184,8 @@ public class ExerciciosAulaInicial {
                     notas.add(8.1);
                     notas.add(5.4);
 
-                    Double media = utils.averageOf(notas);
-                    System.out.println("Média: " + media);
-                    exibeNotasAcimaDaMedia(notas, media);
+                    System.out.println("Média: " + utils.averageOf(notas));
+                    exibeNotasAcimaDaMedia(notas);
                     break;
 
                 case "6":
