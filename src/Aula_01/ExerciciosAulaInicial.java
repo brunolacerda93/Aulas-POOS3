@@ -2,7 +2,10 @@ package Aula_01;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Random;
 import java.util.Scanner;
+
+import tools.utils;
 
 public class ExerciciosAulaInicial {
     private static Double jurosCompostosPorAno(double capital, double taxa, double anos) {
@@ -10,7 +13,7 @@ public class ExerciciosAulaInicial {
     }
 
     private static Double calculaIMC(double quilos, double altura) {
-        return quilos/(altura*altura);
+        return quilos / (altura * altura);
     }
 
     private static String triangulamento(int lado1, int lado2, int lado3) {
@@ -63,63 +66,144 @@ public class ExerciciosAulaInicial {
             }
         } while (idade >= 0);
 
-        sc.close();
         return ls;
     }
 
-    private static Double averageOf(List<? extends Number> array) {
-        if (array == null || array.isEmpty()) {
-            return null;
+    private static List<List<Integer>> mockIntegerMatrixFourByFour() {
+        final int FOUR = 4;
+        Random rand = new Random();
+        List<List<Integer>> matrix = new ArrayList<>();
+
+        for (int i = 0; i < FOUR; i++) {
+            List<Integer> lsInt = new ArrayList<>();
+            for (int j = 0; j < FOUR; j++) {
+                lsInt.add(rand.nextInt(10, 100));
+            }
+            matrix.add(lsInt);
         }
 
-        double sum = 0.0;
-        for (Number n : array) {
-            sum += n.doubleValue();
+        return matrix;
+    }
+
+    private static void printIntegerMatrix(List<List<Integer>> matrix) {
+        for (List<Integer> ls : matrix) {
+            for (Integer n : ls) {
+                System.out.print(" " + n);
+            }
+            System.out.println();
         }
-        return sum/array.size();
+    }
+
+    private static void integerMatrixOperations(List<List<Integer>> matrix) {
+        int diagonalSum = 0;
+        for (int i = 0; i < matrix.size(); i++) {
+            int evenIntsPerRow = 0;
+
+            for (int j = 0; j < matrix.get(i).size(); j++) {
+                if (matrix.get(i).get(j) % 2 == 0) {
+                    evenIntsPerRow++;
+                }
+                if (i == j) {
+                    diagonalSum += matrix.get(i).get(j);
+                }
+            }
+            System.out.println("Na linha " + (i + 1) + " há " + evenIntsPerRow + " números pares");
+        }
+        System.out.println("Soma da diagonal principal: " + diagonalSum);
+
+        for (int i = 0; i < matrix.getFirst().size(); i++) {        // variable i stores the current column
+            List<Integer> lsColumn = new ArrayList<>();
+            for (List<Integer> lsInts : matrix) {                   // iterates through the rows of the matrix
+                lsColumn.add(lsInts.get(i));                        // gets the element of the column i from the specified row
+            }
+            System.out.println("Média da coluna " + (i + 1) + ": " + utils.averageOf(lsColumn));
+        }
     }
 
     public static void AulaInicial() {
-        // Exercício 01
-        System.out.println(jurosCompostosPorAno(10000.0, 0.15, 10.0));
-        System.out.println(jurosCompostosPorAno(2356.47, 0.13, 12.0));
+        Scanner sc = new Scanner(System.in);
 
-        // Exercício 02
-        System.out.println(calculaIMC(130.0, 1.9));
-        System.out.println(calculaIMC(73.0, 1.8));
+        String opc;
+        do { // hast
+            System.out.println("Aula Inicial\n");
+            System.out.println(" 1 - Exercício 01 -> Juros");
+            System.out.println(" 2 - Exercício 02 -> IMC");
+            System.out.println(" 3 - Exercício 03 -> Viagens");
+            System.out.println(" 4 - Exercício 04 -> Triângulos");
+            System.out.println(" 5 - Exercício 05 -> Médias");
+            System.out.println(" 6 - Exercício 06 -> Idades");
+            System.out.println(" 7 - Exercício 07 -> Matriz");
+            System.out.println(" 0 - Sair");
+            System.out.print("Escolha: ");
+            opc = sc.next();
 
-        // Exercício 03
+            switch (opc) {
+                case "1":
+                    System.out.println(jurosCompostosPorAno(10000.0, 0.15, 10.0));
+                    System.out.println(jurosCompostosPorAno(2356.47, 0.13, 12.0));
+                    break;
 
-        // Exercício 04
-        System.out.println(triangulamento(3, 4, 5));
-        System.out.println(triangulamento(6, 6, 6));
-        System.out.println(triangulamento(6, 6, 4));
-        System.out.println(triangulamento(2, 6, 3));
+                case "2":
+                    System.out.println(calculaIMC(130.0, 1.9));
+                    System.out.println(calculaIMC(73.0, 1.8));
+                    break;
 
-        // Exercício 05 -ish
-        ArrayList<Double> notas = new ArrayList<>();
-        notas.add(9.6);
-        notas.add(3.8);
-        notas.add(7.2);
-        notas.add(8.1);
-        notas.add(5.4);
+                case "3":
+                    System.out.println("missing...");
+                    break;
 
-        Double media = averageOf(notas);
-        System.out.println("Média: " + media);
-        exibeNotasAcimaDaMedia(notas, media);
+                case "4":
+                    System.out.println(triangulamento(3, 4, 5));
+                    System.out.println(triangulamento(6, 6, 6));
+                    System.out.println(triangulamento(6, 6, 4));
+                    System.out.println(triangulamento(2, 6, 3));
+                    break;
 
-        // Exercício 06
-        List<Integer> idades = capturaIdades();
-        System.out.println("Média das idades: " + averageOf(idades));
+                case "5":
+                    List<Double> notas = new ArrayList<>();
+                    notas.add(9.6);
+                    notas.add(3.8);
+                    notas.add(7.2);
+                    notas.add(8.1);
+                    notas.add(5.4);
 
-        int n;
+                    Double media = utils.averageOf(notas);
+                    System.out.println("Média: " + media);
+                    exibeNotasAcimaDaMedia(notas, media);
+                    break;
 
-        n = 0; for (Integer i : idades) if (i > 20) n++;
-        System.out.println(n + " pessoas na lista são maiores de idade");
+                case "6":
+                    List<Integer> idades = capturaIdades();
+                    System.out.println("Média das idades: " + utils.averageOf(idades));
 
-        n = 0; for (Integer i : idades) if (i > 65) n++;
-        System.out.println(n + " pessoas na lista estão acima dos 65 anos");
+                    int n;
 
-        // Exercício 07
+                    n = 0;
+                    for (Integer i : idades) if (i > 20) n++;
+                    System.out.println(n + " pessoas na lista são maiores de idade");
+
+                    n = 0;
+                    for (Integer i : idades) if (i > 65) n++;
+                    System.out.println(n + " pessoas na lista estão acima dos 65 anos");
+
+                    break;
+
+                case "7":
+                    List<List<Integer>> matrix = mockIntegerMatrixFourByFour();
+                    printIntegerMatrix(matrix);
+                    integerMatrixOperations(matrix);
+                    break;
+
+                case "0": break;
+
+                default:
+                    System.out.println("INVÁLIDO!!!");
+                    break;
+            }
+            utils.pause();
+
+        } while (!opc.equals("0"));
+
+        sc.close();
     }
 }
