@@ -16,6 +16,13 @@ public class ExerciciosAulaInicial {
         return quilos / (altura * altura);
     }
 
+    private static double viagens(int kmLimite, double valor1, double valor2, int kmPercorridos) {
+        if (kmPercorridos < kmLimite) {
+            return kmPercorridos * valor1;
+        }
+        return kmPercorridos * valor2;
+    }
+
     private static String triangulamento(int lado1, int lado2, int lado3) {
         if (!isTriangle(lado1, lado2, lado3)) {
             return "Não é um Triângulo!";
@@ -149,7 +156,8 @@ public class ExerciciosAulaInicial {
                     break;
 
                 case "3":
-                    System.out.println("missing...");
+                    System.out.println(viagens(100, 1.5, 1.25, 50));
+                    System.out.println(viagens(150, 1.4, 1.15, 250));
                     break;
 
                 case "4":
