@@ -5,11 +5,11 @@ import java.util.List;
 import java.util.Scanner;
 
 public class ExerciciosAulaInicial {
-    private static Double calculaJurosCompostosPorAno(double capital, double taxa, double anos) {
+    private static Double jurosCompostosPorAno(double capital, double taxa, double anos) {
         return capital * Math.pow((1 + taxa), anos);
     }
 
-    private static Double calculaIMC(Double quilos, Double altura) {
+    private static Double calculaIMC(double quilos, double altura) {
         return quilos/(altura*altura);
     }
 
@@ -37,24 +37,16 @@ public class ExerciciosAulaInicial {
                 && b + c > a;
     }
 
-    private static void calculaMediaNotas(List<Double> notas) {
-        double media = calculateAverage(notas);
-        System.out.println("Média: " + media);
-
+    private static void exibeNotasAcimaDaMedia(List<Double> lsNotas, Double media) {
+        if (lsNotas == null || media == null) {
+            return;
+        }
         System.out.println("Acima da média:");
-        for (Double n : notas) {
+        for (Double n : lsNotas) {
             if (n > media) {
                 System.out.println(n);
             }
         }
-    }
-
-    private static double calculateAverage(List<? extends Number> array) {
-        double sum = 0.0;
-        for (Number n : array) {
-            sum += n.doubleValue();
-        }
-        return sum/array.size();
     }
 
     private static List<Integer> capturaIdades() {
@@ -75,10 +67,22 @@ public class ExerciciosAulaInicial {
         return ls;
     }
 
+    private static Double averageOf(List<? extends Number> array) {
+        if (array == null || array.isEmpty()) {
+            return null;
+        }
+
+        double sum = 0.0;
+        for (Number n : array) {
+            sum += n.doubleValue();
+        }
+        return sum/array.size();
+    }
+
     public static void AulaInicial() {
         // Exercício 01
-        System.out.println(calculaJurosCompostosPorAno(10000.0, 0.15, 10.0));
-        System.out.println(calculaJurosCompostosPorAno(2356.47, 0.13, 12.0));
+        System.out.println(jurosCompostosPorAno(10000.0, 0.15, 10.0));
+        System.out.println(jurosCompostosPorAno(2356.47, 0.13, 12.0));
 
         // Exercício 02
         System.out.println(calculaIMC(130.0, 1.9));
@@ -93,17 +97,20 @@ public class ExerciciosAulaInicial {
         System.out.println(triangulamento(2, 6, 3));
 
         // Exercício 05 -ish
-        ArrayList<Double> Notas = new ArrayList<>();
-        Notas.add(9.6);
-        Notas.add(3.8);
-        Notas.add(7.2);
-        Notas.add(8.1);
-        Notas.add(5.4);
-        calculaMediaNotas(Notas);
+        ArrayList<Double> notas = new ArrayList<>();
+        notas.add(9.6);
+        notas.add(3.8);
+        notas.add(7.2);
+        notas.add(8.1);
+        notas.add(5.4);
+
+        Double media = averageOf(notas);
+        System.out.println("Média: " + media);
+        exibeNotasAcimaDaMedia(notas, media);
 
         // Exercício 06
         List<Integer> idades = capturaIdades();
-        System.out.println("Média das idades: " + calculateAverage(idades));
+        System.out.println("Média das idades: " + averageOf(idades));
 
         int n;
 
