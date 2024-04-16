@@ -12,6 +12,8 @@ public class Curso {
         this.valor = valor;
         this.cargaHoraria = cargaHoraria;
         this.categoria = categoria;
+
+        categoria.getCursos().add(this);
     }
 
     public Categoria getCategoria() {

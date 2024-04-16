@@ -28,5 +28,5 @@ public abstract class Pessoa {
         this.cpf = cpf;
     }
 
-    protected abstract List<Curso> obterCursos();
+    public abstract List<Curso> obterCursos();
 }

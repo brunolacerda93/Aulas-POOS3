@@ -4,10 +4,12 @@ public class Matricula {
 
     private Turma turma;
     private double nota;
+    private int frequencia;
 
-    public Matricula(Turma turma, double nota) {
+    public Matricula(Turma turma, double nota, int frequencia) {
         this.turma = turma;
         this.nota = nota;
+        this.frequencia = frequencia;
     }
 
     public Turma getTurma() {
@@ -24,5 +26,13 @@ public class Matricula {
 
     public void setNota(double nota) {
         this.nota = nota;
+    }
+
+    public int getFrequencia() {
+        return frequencia;
+    }
+
+    public void setFrequencia(int frequencia) {
+        this.frequencia = frequencia;
     }
 }
