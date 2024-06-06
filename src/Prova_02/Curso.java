@@ -1,9 +1,13 @@
 package Prova_02;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class Curso {
     private int id;
     private String nome;
     private String sigla;
+    private final List<Aluno> lsAlunos = new ArrayList<Aluno>();
 
     public int getId() {
         return id;
@@ -31,8 +35,9 @@ public class Curso {
 
 
     public void exibirAlunos() {
-        System.out.println(GraduacaoSQLiteDAO.getInstance().findByCurso(this));
-        System.out.println(PosGraduacaoSQLiteDAO.getInstance().findByCurso(this));
+        lsAlunos.addAll(GraduacaoSQLiteDAO.getInstance().findByCurso(this));
+        lsAlunos.addAll(PosGraduacaoSQLiteDAO.getInstance().findByCurso(this));
+        System.out.println(lsAlunos);
     }
 
     public void incluirAluno(Aluno aluno) {
@@ -42,10 +47,11 @@ public class Curso {
         else if (aluno instanceof PosGraduacao) {
             PosGraduacaoSQLiteDAO.getInstance().setCurso(aluno, this);
         }
+        lsAlunos.add(aluno);
     }
 
     public void removerAluno(Aluno aluno) {
-
+        lsAlunos.remove(aluno);
     }
 
     @Override
