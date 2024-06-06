@@ -35,6 +35,7 @@ public class Curso {
 
 
     public void exibirAlunos() {
+        lsAlunos.clear();
         lsAlunos.addAll(GraduacaoSQLiteDAO.getInstance().findByCurso(this));
         lsAlunos.addAll(PosGraduacaoSQLiteDAO.getInstance().findByCurso(this));
         System.out.println(lsAlunos);
